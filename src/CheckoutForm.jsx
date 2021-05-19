@@ -39,16 +39,17 @@ export default function CheckoutForm() {
       },
     })
       .then((res) => {
-        return res.json()
+        if (res.ok) {
+          return res.json()
+        }
+        console.log('res', res)
+        throw new Error(res.error)
       })
       .then(({ paymentIntent }) => {
         console.log('paymentIntent', JSON.stringify(paymentIntent, null, 4))
-        alert('paymentIntent.status :' + paymentIntent.status)
       })
-  }
-
-  const onRefund = () => {
-
+      // .catch(({ data: { response: { error } } }) => console.log('error', error))
+      .catch((error) => console.log('error', error.message))
   }
 
   const cardStyle = {

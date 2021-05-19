@@ -28,14 +28,15 @@ app.post('/create-payment-intent', async (req, res) => {
   })
 })
 
-app.post('/cancel-payment-intent/:pi_id', async (req, res) => {
+app.post('/cancel-payment-intent/:id', async (req, res) => {
   try {
-    const { pi_id } = req.params
-    const paymentIntent = await stripe.paymentIntents.cancel(pi_id)
+    const { id } = req.params
+    const paymentIntent = await stripe.paymentIntents.cancel(id)
     res.send({ paymentIntent })
   } catch (error) {
-    console.error(error)
-    res.status(500).send({ error: error.message })
+    console.error(JSON.stringify(error, null, 4))
+    console.error(error.raw)
+    res.status(500).send({ error: error.raw.message })
   }
 })
 
