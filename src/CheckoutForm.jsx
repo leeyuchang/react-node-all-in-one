@@ -11,6 +11,7 @@ export default function CheckoutForm() {
   const elements = useElements()
 
   const [pi, setPi] = useState('')
+  const [ch, setCh] = useState('')
 
   const onCreatePI = () => {
     // Create PaymentIntent as soon as the page loads
@@ -50,6 +51,26 @@ export default function CheckoutForm() {
       })
       // .catch(({ data: { response: { error } } }) => console.log('error', error))
       .catch((error) => console.log('error', error.message))
+  }
+
+  const onRefund = () => {
+    fetch(`/refund-payment-intent/${pi}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        console.log('res', res)
+        throw new Error(res.error)
+      })
+      .then(({ refund }) => {
+        console.log('refund', JSON.stringify(refund, null, 4))
+      })
+      .catch((error) => console.log('error', error))
   }
 
   const cardStyle = {
@@ -165,6 +186,16 @@ export default function CheckoutForm() {
           Refresh the page to pay again.
         </p>
       </form>
+
+      <div
+        style={{
+          marginTop: '5rem',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <button onClick={onRefund}>Refund</button>
+      </div>
     </div>
   )
 }
