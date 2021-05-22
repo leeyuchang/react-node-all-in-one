@@ -1,13 +1,12 @@
-# Accept a Card Payment
+# Running the sample
 
-Build a simple checkout form to collect card details. Included are some basic build and run scripts you can use to start up the application.
-
-## Running the sample
+node server 4242 port
+react server 9000 port
 
 1. Build the application
 
-```yarn```
+`yarn`
 
- 2. Run the application
+2.  Run the application
 
-```yarn start```
+`yarn start`
