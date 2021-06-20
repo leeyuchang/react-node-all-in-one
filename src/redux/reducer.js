@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import socket from '../modules/socket';
-import orderitems from '../modules/orderitems';
 import loading from '../modules/loading';
+import orderitems from '../modules/orderitems';
 
 const rootReducer = combineReducers({
   socket,
