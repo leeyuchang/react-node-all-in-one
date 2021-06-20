@@ -1,5 +1,4 @@
 const express = require('express');
-const { batch } = require('react-redux');
 const socketio = require('socket.io');
 
 const app = express()
@@ -79,7 +78,7 @@ io.on('connection', socket => {
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
   console.log('customer connected!', ip, socket.id);
-  
+
   setInterval(() => {
     socket.emit('insert', {taskName: `Task ${baseTaskID + i}`, taskID: baseTaskID + i})
   }, 2000);
